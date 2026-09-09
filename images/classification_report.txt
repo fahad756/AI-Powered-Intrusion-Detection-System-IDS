@@ -1,0 +1,46 @@
+MODEL COMPARISON (test set, leak-free features, 'from' column removed)
+========================================================================
+Logistic Regression (basic statistical baseline):    Test Accuracy = 0.6282
+Random Forest (100 trees, balanced weights):         Test Accuracy = 0.7171
+Gradient Boosting (HistGradientBoostingClassifier):  Test Accuracy = 0.7306
+
+
+RANDOM FOREST - Per-Class Report
+========================================================================
+              precision    recall  f1-score   support
+
+   Blackhole     0.9589    0.3236    0.4839     37150
+    Flooding     0.9220    0.7250    0.8117     73120
+      Normal     0.6515    0.9646    0.7777     43894
+        Rank     0.6105    0.8371    0.7061     26106
+     Version     0.5441    0.7189    0.6194     29445
+
+    accuracy                         0.7171    209715
+   macro avg     0.7374    0.7138    0.6798    209715
+weighted avg     0.7801    0.7171    0.7064    209715
+
+
+GRADIENT BOOSTING - Per-Class Report
+========================================================================
+              precision    recall  f1-score   support
+
+   Blackhole     0.6371    0.6875    0.6613     37150
+    Flooding     0.8268    0.7853    0.8055     73120
+      Normal     0.6515    0.9646    0.7777     43894
+        Rank     0.8147    0.7414    0.7763     26106
+     Version     0.7484    0.2906    0.4186     29445
+
+    accuracy                         0.7306    209715
+   macro avg     0.7357    0.6939    0.6879    209715
+weighted avg     0.7440    0.7306    0.7162    209715
+
+
+KEY FINDING
+========================================================================
+Both models confuse Blackhole and Version attacks with each other far more
+than any other pair of classes. Gradient Boosting's higher overall accuracy
+comes from trading Random Forest's weak Blackhole recall (0.32) for much
+better Blackhole recall (0.69) -- at the cost of Version recall dropping
+from 0.72 to 0.29. This is a data-separability limitation (Blackhole and
+Version messages look very similar in the available features), not
+something either model architecture fixes.
