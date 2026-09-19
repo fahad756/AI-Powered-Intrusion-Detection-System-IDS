@@ -12,8 +12,7 @@ This README is written to walk through that whole process, not just report a fin
 
 ## 1. The Problem
 
-**RPL** (Routing Protocol for Low-power and Lossy Networks) is how IoT devices build their
-routing tree. Several well-known attacks target it:
+Detect and classify **RPL** (Routing Protocol for Low-power and Lossy Networks) routing attacks in IoT networks using machine learning. The goal is to identify whether network traffic is Normal or one of four attacks: Blackhole, Flooding, Rank, and Version.
 
 | Attack | What it does |
 |---|---|
@@ -29,22 +28,10 @@ or one of these four attacks — a **5-class supervised classification** problem
 
 ## 2. The Dataset
 
-**[IoT-RPL 2021: Cyber Attack Dataset Based on RPL Routing for IoT](https://data.mendeley.com/datasets/4rcbbry2sc/1)**
-— Walid Dhifallah, Mounira Tarhouni, Tarek Moulahi, Salah Zidi. Mendeley Data, DOI:
-[10.17632/4rcbbry2sc.1](https://doi.org/10.17632/4rcbbry2sc.1), licensed CC BY 4.0.
 
-Published specifically to support IDS research on RPL-based IoT/6LoWPAN networks so
-researchers don't have to simulate the attacks themselves. Stored locally as
-`Dataset/RPL_Routing_Attacks.csv` — one row per RPL control message (DIS / DIO / DAO).
 
-> **Scope note:** the full published dataset is split across 10 files (`0.csv` through
-> `9.csv`, **10,242,176 rows total**). For this project, only **one file (`0.csv`,
-> 1,048,575 rows — ~10% of the full dataset)** was used — a deliberate scope decision to
-> keep training times and iteration speed reasonable for a first version, not a limitation
-> of the approach itself. The full 10-file set would be the natural next step to test
-> whether findings (e.g. the Blackhole/Version overlap in Section 6) hold at larger scale.
+IoT-RPL 2021 dataset containing 1,048,575 network traffic records and five classes: Normal, Blackhole, Flooding, Rank, and Version.
 
-- **1,048,575 rows** (from the one file used), 23 columns (22 features + `label`)
 - Class distribution (imbalanced — see below):
 
 | Label | Count |
@@ -58,6 +45,11 @@ researchers don't have to simulate the attacks themselves. Stored locally as
 Columns include protocol layers (`frame_proto`, `protocol`, `control_type`), the RPL message
 type (`type_cont_messg`: DIS/DIO/DAO), and protocol-specific fields (`DOAGID`, `DIO_info`,
 `object_cont_pt`, etc.).
+
+
+**[IoT-RPL 2021: Cyber Attack Dataset Based on RPL Routing for IoT](https://data.mendeley.com/datasets/4rcbbry2sc/1)**
+— Walid Dhifallah, Mounira Tarhouni, Tarek Moulahi, Salah Zidi. Mendeley Data, DOI:
+[10.17632/4rcbbry2sc.1](https://doi.org/10.17632/4rcbbry2sc.1), licensed CC BY 4.0.
 
 ---
 
