@@ -22,7 +22,7 @@ Detect and classify **RPL** (Routing Protocol for Low-power and Lossy Networks) 
 | **Version** | Forces unnecessary, costly network-wide topology rebuilds |
 
 **Goal:** given a single simulated RPL control message, predict whether it's Normal traffic
-or one of these four attacks — a **5-class supervised classification** problem.
+or one of these four attacks, A **5-class supervised classification** problem.
 
 ---
 
